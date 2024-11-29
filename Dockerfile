@@ -1,6 +1,7 @@
 # 使用 Puppeteer 官方镜像
 FROM ghcr.io/puppeteer/puppeteer:19.11.1
-
+# 切换到 root 用户
+USER root
 # 设置工作目录
 WORKDIR /app
 
@@ -8,8 +9,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 COPY src ./src
 
-# 切换到 root 用户
-USER root
+
 
 # 安装项目依赖
 RUN npm install
