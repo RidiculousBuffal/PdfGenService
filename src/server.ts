@@ -4,7 +4,7 @@ import {generatePDFFromFile, generatePDFFromHTML} from "./pdfService";
 import multer from "multer";
 import cors from 'cors'
 const app = express();
-const PORT = 3000;
+const PORT = 8080;
 app.use(cors()); // 允许特定的前端地址访问
 app.use(bodyParser.json());
 const upload = multer({
