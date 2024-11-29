@@ -6,7 +6,9 @@ import puppeteer from "puppeteer";
  * @returns - PDF 的二进制 Buffer
  */
 export const generatePDFFromHTML = async (htmlContent: string): Promise<Buffer> => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+  args: ['--no-sandbox', '--disable-setuid-sandbox'], // 适用于 Docker 环境
+});
   const page = await browser.newPage();
 
   // 设置 HTML 内容
