@@ -13,7 +13,7 @@ USER root
 
 # 安装项目依赖
 RUN npm install
-
+RUN npx puppeteer browsers install chrome
 # 切换回非 root 用户
 USER pptruser
 
