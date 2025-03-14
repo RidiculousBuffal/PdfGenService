@@ -18,6 +18,12 @@ export const generatePDFFromHTML = async (htmlContent: string): Promise<Buffer> 
   const pdfBuffer = await page.pdf({
     format: "A4",
     printBackground: true,
+    margin:{
+      top:10,
+      bottom:10,
+      left:10,
+      right:10
+    }
   });
 
   await browser.close();

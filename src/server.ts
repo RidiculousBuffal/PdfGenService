@@ -7,10 +7,13 @@ import cors from 'cors'
 const app = express();
 const PORT = 8080;
 app.use(cors()); // 允许特定的前端地址访问
-app.use(express.urlencoded({extended: true}))
-app.use(bodyParser.json());
+app.use(express.json({ limit: "1000mb" }));
+app.use(express.urlencoded({ extended: true, limit: "1000mb" })); // 配置 URL-
 const upload = multer({
     dest: "uploads/", // 文件临时存储目录
+     limits: {
+        fileSize: 1000 * 1024 * 1024, // 设置文件大小限制为 10MB
+    },
 });
 
 app.post(
