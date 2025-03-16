@@ -1,5 +1,5 @@
 # 使用 Puppeteer 官方镜像
-FROM ghcr.io/puppeteer/puppeteer:19.11.1
+FROM ghcr.io/puppeteer/puppeteer:24.4.0
 
 # 切换到 root 用户
 USER root
