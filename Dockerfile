@@ -16,7 +16,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # 将本地的宋体字体文件复制到容器中
-COPY fonts/SimSun.ttc /usr/share/fonts/truetype/simsun/
+COPY fonts/simsun.ttc /usr/share/fonts/truetype/simsun/
 
 # 更新字体缓存
 RUN fc-cache -f -v
