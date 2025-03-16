@@ -1,5 +1,5 @@
 # 使用 Puppeteer 官方镜像
-FROM ghcr.io/puppeteer/puppeteer:24.4.0
+FROM ghcr.io/puppeteer/puppeteer:19.11.1
 
 # 切换到 root 用户
 USER root
@@ -7,20 +7,24 @@ USER root
 # 设置工作目录
 WORKDIR /app
 
-# 安装宋体字体
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends \
-    fontconfig \
-    ttf-mscorefonts-installer \
-    fonts-wqy-zenhei \
-    fonts-wqy-microhei \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+# 安装系统依赖
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      fontconfig \
+      fonts-wqy-zenhei \
+      fonts-wqy-microhei && \
+    rm -rf /var/lib/apt/lists/*
 
-# 确保 Puppeteer 包含所需的依赖
+# 将本地的宋体字体文件复制到容器中
+COPY fonts/SimSun.ttc /usr/share/fonts/truetype/simsun/
+
+# 更新字体缓存
+RUN fc-cache -f -v
+
+# 安装 Puppeteer 所需的浏览器
 RUN npx puppeteer browsers install chrome
 
-# 复制项目文件
+# 复制应用代码
 COPY package.json package-lock.json ./
 COPY src ./src
 
